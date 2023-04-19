@@ -36,16 +36,21 @@ def main():
             log_message = f"{server} is {status} (response time: {response_time})"
             print(log_message)
 
-        checks = makelistchecks()
-        env = Environment(loader=FileSystemLoader('templates'))
-        template = env.get_template('status_template.html')
+        templateLoader = FileSystemLoader(searchpath="./")
+        templateEnv = Environment(loader=templateLoader)
+        TEMPLATE_FILE = "status_template.html"
+        template = templateEnv.get_template(TEMPLATE_FILE)
 
-        # Render the template with the server data
-        html_output = template.render(servers=servers)
+        # this is where to put args to the template renderer
+        outputText = template.render(servers=servers)
+
+        print(outputText)
 
         # Write the HTML output to a file
         with open('status_template.html', 'w') as f:
-            f.write(html_output)
+            f.write(outputText)
+
+        print(outputText)
 
 #        time.sleep(10)  # wait for 60 seconds before pinging again
 
