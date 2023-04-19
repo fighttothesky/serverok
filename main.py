@@ -3,6 +3,7 @@ import argparse
 import ping3
 from uti import open_server_file, add_server_to_file, remove_server_in_file, add_checks_to_file, makelistchecks
 from jinja2 import Environment, FileSystemLoader
+import json
 
 
 def main():
@@ -36,21 +37,24 @@ def main():
             log_message = f"{server} is {status} (response time: {response_time})"
             print(log_message)
 
+        with open('checks.json') as f:
+            data = json.load(f)
+
         templateLoader = FileSystemLoader(searchpath="./")
         templateEnv = Environment(loader=templateLoader)
         TEMPLATE_FILE = "status_template.html"
         template = templateEnv.get_template(TEMPLATE_FILE)
 
         # this is where to put args to the template renderer
-        outputText = template.render(servers=servers)
+        output = template.render(data=data)
 
-        print(outputText)
+        print(output)
 
         # Write the HTML output to a file
         with open('status_template.html', 'w') as f:
-            f.write(outputText)
+            f.write(output)
 
-        print(outputText)
+        print(output)
 
 #        time.sleep(10)  # wait for 60 seconds before pinging again
 

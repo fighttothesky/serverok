@@ -14,11 +14,11 @@
         </tr>
       </thead>
       <tbody>
-        {% for check in checks %}
+        {% for item in data %}
         <tr>
-          <td>{{ check.name }}</td>
-          <td>{{ check.status }}</td>
-          <td>{{ check.time }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.status }}</td>
+          <td>{{ item.name }}</td>
         </tr>
         {% endfor %}
       </tbody>
