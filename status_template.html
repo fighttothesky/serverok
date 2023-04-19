@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Server Status Report</title>
+  </head>
+  <body>
+    <h1>Server Status Report</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Server Name</th>
+          <th>IP Address</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for check in checks %}
+        <tr>
+          <td>{{ check.name }}</td>
+          <td>{{ check.status }}</td>
+          <td>{{ check.time }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
